@@ -1,0 +1,61 @@
+﻿@model IEnumerable<WebEmpleados.Models.Empleado>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Empleados</h2>
+<hr />
+
+@{
+    if (@TempData["mensaje"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["mensaje"]
+        </div>
+    }
+}
+
+<p>
+    @Html.ActionLink("Nuevo Empleado", "Nuevo", null ,new { @class = "btn btn-success" })
+</p>
+<table class="table table-bordered">
+    <tr>
+        <th>Codigo</th>
+        <th>Nombres</th>
+        <th>Apellidos</th>
+        <th>Correo</th>
+        <th>Fecha Nacimiento</th>
+        <th>Sueldo</th>
+        <th>Acciones</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idEmp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.apellidos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.correo)
+            </td>
+            <td>
+                @item.fechaNac.ToString("yyyy-MM-dd")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sueldo)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", new { id = item.idEmp }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Eliminar", "Eliminar", new { id = item.idEmp }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>
